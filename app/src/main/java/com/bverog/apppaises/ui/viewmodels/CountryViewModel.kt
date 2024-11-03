@@ -42,7 +42,7 @@ class CountryViewModel (private val repository: CountryRepository = CountryRepos
     }
 
     // método para traer la información
-    fun fetchCountries(){
+    private fun fetchCountries(){
         // para notificar
         viewModelScope.launch {
             try{
@@ -54,6 +54,11 @@ class CountryViewModel (private val repository: CountryRepository = CountryRepos
                 "An unexpected error occurred")
             }
         }
+    }
+
+    // función pública para llamarse desde el composable para recargar los países
+    fun reloadCountries(){
+        fetchCountries()
     }
 
 

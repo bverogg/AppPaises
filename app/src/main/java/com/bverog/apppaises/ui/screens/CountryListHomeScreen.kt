@@ -54,30 +54,27 @@ fun CountryListHomeScreen(innerPadding: PaddingValues,
 
     // carga el listado al volver a la pantalla
     LaunchedEffect(Unit) {
-        countryViewModel.fetchCountries() // Llama para obtener los países al volver
+        countryViewModel.reloadCountries() // Llama para obtener los países al volver
     }
 
 
-    val Blue = Color(0xFF3266a8) // Azul
+    val blue = Color(0xFF3266a8) // Azul
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {
                 navController.navigate("add") // Cambia esto por la ruta deseada
                 // Acción a realizar cuando se hace clic en el botón
             },
-                //containerColor = Color.DarkGray ,
-                containerColor = Blue,
+                containerColor = blue,
                 contentColor = Color.White// Color azul marino
                 ) {
                 Icon(Icons.Default.Add, contentDescription = "Add")
-               // Icons.AutoMirrored.Filled.ArrowBack
             }
         }
     ) { paddingValues ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                //.padding(innerPadding),
                 .padding(paddingValues), // Usa paddingValues para evitar solapamiento
             contentAlignment = Alignment.TopStart
         ) {
@@ -124,7 +121,6 @@ fun CountryItem(country: Country) {
             country.image?.let { flagUrl ->
                 // Todo : Agregar AsyncImage
                 AsyncImage(model = flagUrl,
-                    //contentDescription = country.name.common,
                     contentDescription = country.name,
                     modifier = Modifier.size(64.dp))
             }
@@ -138,12 +134,7 @@ fun CountryItem(country: Country) {
     }
 }
 
-/*@Preview(showBackground = true)
-@Composable
-fun PreviewCountryListHomeScreen() {
-    // Proporcionar valores de padding
-    CountryListHomeScreen(innerPadding = PaddingValues(16.dp), navController = rememberNavController())
-}*/
+
 @Composable
 fun CountryList(countries: List<Country>) {
     Box(

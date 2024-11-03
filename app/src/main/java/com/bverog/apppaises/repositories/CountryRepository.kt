@@ -13,7 +13,7 @@ class CountryRepository {
         val result = api.getAllCountries()
         return result
     }
-
+    // asíncrono para agregar un país
     suspend fun addCountry(@Body country: Country): Response<Country>{
         val result = api.addCountry(country)
         return result

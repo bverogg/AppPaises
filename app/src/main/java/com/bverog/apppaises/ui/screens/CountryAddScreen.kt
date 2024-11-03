@@ -36,7 +36,6 @@ import androidx.navigation.compose.rememberNavController
 import com.bverog.apppaises.model.Country
 import com.bverog.apppaises.ui.viewmodels.CountryAddUiState
 import com.bverog.apppaises.ui.viewmodels.CountryViewModel
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.LaunchedEffect
 
 
@@ -56,16 +55,15 @@ fun CountryAddScreen(innerPadding: PaddingValues,
     var errorMessage by remember { mutableStateOf("") }
 
 
-    val Blue = Color(0xFF3266a8) // Azul
+    val blue = Color(0xFF3266a8) // Azul
 
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                navController.navigate("home") // Cambia esto por la ruta deseada
-                // Acción a realizar cuando se hace clic en el botón
+                navController.navigate("home") // se regresa a home
             },
                 //containerColor = Color.DarkGray ,
-                containerColor = Blue,
+                containerColor = blue,
                 contentColor = Color.White// Color azul marino
             ) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -127,10 +125,7 @@ fun CountryAddScreen(innerPadding: PaddingValues,
                     } else {
                         val newCountry = Country(name = name, capital = capital, image = imageUrl)
                         countryViewModel.onAddCountry(newCountry) // Llama al método para agregar el país
-
                     }
-
-
                 },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color(0xFF3266a8),
@@ -138,8 +133,7 @@ fun CountryAddScreen(innerPadding: PaddingValues,
                     ),
                     modifier = Modifier.fillMaxWidth()
                     .padding(top = 30.dp)) {
-                    Text("Guardar")
-
+                    Text("Agregar País")
                 }
 
                 // Muestra el mensaje de error si existe
@@ -154,7 +148,7 @@ fun CountryAddScreen(innerPadding: PaddingValues,
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
                     }
                     is CountryAddUiState.Success -> {
-                        Text("País agregado correctamente", color = Color.Green)
+                        Text("País agregado correctamente", color = Color(0xFF4C9444))
                         LaunchedEffect(Unit) {
                             navController.popBackStack() // Navega de regreso tras agregar el país
                         }
@@ -168,13 +162,10 @@ fun CountryAddScreen(innerPadding: PaddingValues,
             }
         }
     }
-
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewCountryAddScreen() {
- // Proporcionar valores de padding
  CountryAddScreen(innerPadding = PaddingValues(16.dp), navController = rememberNavController())
 }
