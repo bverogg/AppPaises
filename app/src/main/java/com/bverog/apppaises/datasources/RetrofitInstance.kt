@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 // Objeto tipo singleton no tiene una clase definida, se pueden generar propiedades
 object RetrofitInstance {
 
-    private const val BASE_URL = "http://4.174.188.145:8080/"
+    private const val BASE_URL = "http://20.175.163.2:8080/"
 
     private val gson: Gson = GsonBuilder().setLenient().create()
 
